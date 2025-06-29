@@ -10,6 +10,7 @@ COPY . /var/www/html/
 
 # Set write permissions for uploads folder
 RUN chmod -R 777 /var/www/html/uploads
+RUN mkdir -p /var/www/html/uploads && chmod -R 777 /var/www/html/uploads
 
 # Expose Apache's default port
 EXPOSE 80
