@@ -1,18 +1,31 @@
 <?php
-$id = $_GET['id'];
-$galleryFile = '../data/gallery.json';
-$gallery = json_decode(file_get_contents($galleryFile), true);
+ob_start();
+session_start();
 
-// Delete image file
-$filename = $gallery[$id]['filename'];
-unlink('uploads/' . $filename);
+if (isset($_GET['file'])) {
+    $filename = basename($_GET['file']);
+    $imagePath = __DIR__ . '/../uploads/' . $filename;
+    $jsonFile = __DIR__ . '/../data/gallery.json';
 
-// Remove from array
-array_splice($gallery, $id, 1);
+    if (file_exists($imagePath)) {
+        unlink($imagePath); // delete image
+    }
 
-// Save updated data
-file_put_contents($galleryFile, json_encode($gallery, JSON_PRETTY_PRINT));
+    // Load JSON and remove entry
+    $gallery = file_exists($jsonFile) ? json_decode(file_get_contents($jsonFile), true) : [];
 
-// Redirect
-header('Location: dashboard.php');
-exit;
+    $gallery = array_filter($gallery, function ($item) use ($filename) {
+        return $item['filename'] !== $filename;
+    });
+
+    // Try saving updated JSON
+    if (is_writable(dirname($jsonFile))) {
+        file_put_contents($jsonFile, json_encode(array_values($gallery), JSON_PRETTY_PRINT));
+    } else {
+        die("❌ JSON folder is not writable.");
+    }
+
+    header("Location: dashboard.php?deleted=1");
+    exit;
+}
+?>
