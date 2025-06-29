@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Services | Instant Furniture</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fff;
+      color: #333;
+    }
+
+    header {
+      background: #1a1a1a;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    section#services {
+      padding: 40px 20px;
+      background: #f9f9f9;
+    }
+
+    section#services h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 32px;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      text-align: center;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .service-card h3 {
+      margin-top: 15px;
+      font-size: 20px;
+    }
+
+    .service-card p {
+      padding: 0 15px 20px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    footer {
+      text-align: center;
+      background: #222;
+      color: #ccc;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 500px) {
+      .service-card h3 {
+        font-size: 18px;
+      }
+
+      .service-card p {
+        font-size: 13px;
+      }
+    }
+    .btn-contact {
+  display: inline-block;
+  margin: 10px auto 20px;
+  padding: 10px 20px;
+  background-color: #1a1a1a;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+.btn-contact:hover {
+  background-color: #333;
+}
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Instant Furniture</h1>
+    <p>Expert Woodwork • Custom Designs • Elegant Finishes</p>
+  </header>
+
+  <section id="services">
+    <h2>Our Services</h2>
+    <div class="service-grid">
+      <div class="service-card">
+        <img src="images/service-wardrobe.jpg" alt="Wardrobe" />
+        <h3>Wardrobes</h3>
+        <p>Beautiful modern wardrobes designed and installed to fit your space perfectly.</p>
+        <a href="contact.html" class="btn-contact">Contact Us</a>
+        <a href="contact.html?service=Wardrobe" class="btn">Request Quote</a>
+      </div>
+
+      <div class="service-card">
+        <img src="images/service-kitchen.jpg" alt="Kitchen Cabinets" />
+        <h3>Kitchen Cabinets</h3>
+        <p>Elegant and functional kitchen setups tailored to your taste and kitchen size.</p>
+        <a href="contact.html?service=Kitchen Cabinets" class="btn-contact">Contact Us</a>
+        <a href="contact.html?service=Kitchen Cabinet" class="btn">Request Quote</a>
+      </div>
+
+      <div class="service-card">
+        <img src="images/service-bed.jpg" alt="Custom Beds" />
+        <h3>Beds</h3>
+        <p>Strong and stylish custom beds crafted with comfort and longevity in mind.</p>
+        <a href="contact.html?service=Beds" class="btn-contact">Contact Us</a>
+        <a href="contact.html?service=Bed" class="btn">Request Quote</a>
+      </div>
+
+      <div class="service-card">
+        <img src="images/service-tv.jpg" alt="Wall TV Cabinets" />
+        <h3>TV Cabinets</h3>
+        <p>Wall-mounted TV units that organize your electronics and elevate your space.</p>
+       <a href="contact.html?service=TV Cabinets" class="btn-contact">Contact Us</a>
+       <a href="contact.html?service=TV Cabinet" class="btn">Request Quote</a>
+      </div>
+    <div class="service-card">
+    <img src="images/decor.jpg" alt="Interior and Exterior Decoration">
+    <h3>Interior & Exterior Decoration</h3>
+    <p>Modern and elegant decoration for both indoor and outdoor spaces.</p>
+    <a href="contact.html?service=interior and exterior decor" class="btn-contact">Contact Us</a>
+    <a href="contact.html?service=Interior Decoration" class="btn">Request Quote</a>
+  </div>
+      <div class="service-card">
+        <img src="images/service-furniture.jpg" alt="Furniture" />
+        <h3>Living Room Furniture</h3>
+        <p>We create stylish sofas, chairs, tables, and other essentials for your living room.</p>
+        <a href="contact.html?service=Living Room Furniture" class="btn-contact">Contact Us</a>
+        <a href="contact.html?service=Furniture" class="btn">Request Quote</a>
+      </div>
+
+      <div class="service-card">
+        <img src="images/service-repair.jpg" alt="Repair" />
+        <h3>Furniture Repairs</h3>
+        <p>We restore and refinish old or damaged furniture to look brand new again.</p>
+       <a href="contact.html?service=Furniture Repairs" class="btn-contact">Contact Us</a>
+       <a href="contact.html?service=Furniture Repairs" class="btn">Request Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Instant Furniture. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
