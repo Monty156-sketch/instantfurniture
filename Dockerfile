@@ -8,6 +8,11 @@ RUN a2enmod rewrite
 # Copy project files into the Apache server directory
 COPY . /var/www/html/
 
+
+# ✅ Ensure uploads folder exists and is writable
+RUN mkdir -p /var/www/html/uploads \
+ && chmod -R 777 /var/www/html/uploads
+
 # Set write permissions for uploads folder
 RUN chmod -R 777 /var/www/html/uploads
 RUN mkdir -p /var/www/html/uploads && chmod -R 777 /var/www/html/uploads
