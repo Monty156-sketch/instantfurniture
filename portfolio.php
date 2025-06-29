@@ -1,110 +1,96 @@
 <?php
-$gallery = json_decode(file_get_contents('data/gallery.json'), true);
-?>
+$gallery = [];
+$jsonPath = __DIR__ . '/data/gallery.json';
 
+if (file_exists($jsonPath)) {
+    $jsonContent = file_get_contents($jsonPath);
+    $gallery = json_decode($jsonContent, true);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Portfolio - InstanFurniture</title>
+  <title>Portfolio | Instant Furniture</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    .filters {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .filters button {
-      margin: 5px;
-    }
-
-    .gallery {
+    .portfolio-gallery {
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
       justify-content: center;
     }
-
-    .gallery-item {
-      width: calc(33.33% - 20px);
-      background: #f8f9fa;
+    .portfolio-item {
+      width: 300px;
+      border: 1px solid #ddd;
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      padding: 10px;
-      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
     }
-
-    .gallery-item img {
+    .portfolio-item:hover {
+      transform: scale(1.03);
+    }
+    .portfolio-item img {
       width: 100%;
-      height: auto;
-      border-radius: 8px;
+      height: 200px;
+      object-fit: cover;
     }
-
-    @media (max-width: 768px) {
-      .gallery-item {
-        width: 100%;
-      }
+    .caption {
+      padding: 15px;
+    }
+    .filters {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .filter-btn {
+      margin: 5px;
     }
   </style>
 </head>
-<body class="container py-5">
-  
-  <header>
-    <h1>Instant Furniture</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="services.html">Services</a>
-      <a href=portfolio.html>Portfolio</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
-  <h2 class="text-center mb-4">🖼️ Our Portfolio</h2>
+<body class="container py-4">
 
-  <!-- Filter Buttons -->
+  <h2 class="text-center mb-4">🛠️ Our Portfolio</h2>
+
   <div class="filters">
-    <button class="filter-btn btn btn-dark" data-category="all">All</button>
-    <button class="filter-btn btn btn-outline-dark" data-category="wardrobe">Wardrobes</button>
-    <button class="filter-btn btn btn-outline-dark" data-category="bed">Beds</button>
-    <button class="filter-btn btn btn-outline-dark" data-category="kitchen">Kitchen Cabinets</button>
-    <button class="filter-btn btn btn-outline-dark" data-category="tv">TV Cabinets</button>
-    <button class="filter-btn btn btn-outline-dark" data-category="sofa">Sofa chairs</button>
-    <button class="filter-btn btn btn-outline-dark" data-category="int & ext decor">Interior & Exterior Decoration</button>
+    <button class="btn btn-outline-primary filter-btn" data-category="all">All</button>
+    <button class="btn btn-outline-primary filter-btn" data-category="wardrobe">Wardrobes</button>
+    <button class="btn btn-outline-primary filter-btn" data-category="bed">Beds</button>
+    <button class="btn btn-outline-primary filter-btn" data-category="kitchen">Kitchen Cabinets</button>
+    <button class="btn btn-outline-primary filter-btn" data-category="tv">TV Cabinets</button>
+    <button class="btn btn-outline-primary filter-btn" data-category="sofa">Sofa chairs</button>
+    <button class="btn btn-outline-primary filter-btn" data-category="int & ext decor">Interior & Exterior Decoration</button>
   </div>
 
-  <!-- Gallery Items -->
-  <div class="gallery" id="gallery">
+  <div class="portfolio-gallery" id="portfolio-gallery">
     <?php foreach ($gallery as $item): ?>
-      <div class="gallery-item" data-category="<?= strtolower(htmlspecialchars($item['category'])) ?>">
-        <img src="admin/uploads/<?= htmlspecialchars($item['filename']) ?>" alt="<?= htmlspecialchars($item['title']) ?>">
-        <h5 class="mt-2"><?= htmlspecialchars($item['title']) ?></h5>
-        <p><?= htmlspecialchars($item['description']) ?></p>
+      <div class="portfolio-item" data-category="<?= htmlspecialchars($item['category']) ?>">
+        <img src="uploads/<?= htmlspecialchars($item['filename']) ?>" alt="<?= htmlspecialchars($item['title']) ?>">
+        <div class="caption">
+          <h5><?= htmlspecialchars($item['title']) ?></h5>
+          <p><?= htmlspecialchars($item['description']) ?></p>
+        </div>
       </div>
     <?php endforeach; ?>
   </div>
 
-  <!-- Filtering Script -->
   <script>
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const galleryItems = document.querySelectorAll('.gallery-item');
+    const buttons = document.querySelectorAll('.filter-btn');
+    const items = document.querySelectorAll('.portfolio-item');
 
-    filterButtons.forEach(button => {
+    buttons.forEach(button => {
       button.addEventListener('click', () => {
         const category = button.getAttribute('data-category');
-        galleryItems.forEach(item => {
-          const itemCategory = item.getAttribute('data-category');
-          if (category === 'all' || itemCategory === category) {
-            item.style.display = 'block';
-          } else {
-            item.style.display = 'none';
-          }
-        });
 
-        // Optional: highlight active button
-        filterButtons.forEach(btn => btn.classList.remove('btn-dark'));
-        button.classList.add('btn-dark');
+        items.forEach(item => {
+          item.style.display = 
+            (category === 'all' || item.getAttribute('data-category') === category)
+              ? 'block'
+              : 'none';
+        });
       });
     });
   </script>
+
 </body>
 </html>

@@ -1,4 +1,4 @@
-<!-- Save this as index.html -->
+<!-- Save this as index.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -136,9 +136,9 @@
   <header>
     <h1>Instant Furniture</h1>
     <nav>
-      <a href="index.html">Home</a>
+      <a href="index.php">Home</a>
       <a href="services.html">Services</a>
-      <a href=portfolio.html>Portfolio</a>
+      <a href=portfolio.php>Portfolio</a>
       <a href="contact.html">Contact</a>
     </nav>
   </header>
@@ -148,7 +148,7 @@
     <p>Beautiful wardrobes, cabinets, beds and more — handcrafted to perfection.</p>
     <p>We build wardrobes, kitchen cabinets, beds — and deliver stunning interior & exterior decoration.</p>
     <div class="buttons">
-     <a href="portfolio.html" class="btn">View Portfolio</a>
+     <a href="portfolio.php" class="btn">View Portfolio</a>
     </div>
   </section>
 

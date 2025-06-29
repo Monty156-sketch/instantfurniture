@@ -1,19 +1,27 @@
 <?php
-// Handle form submission
+ob_start();
+session_start();
+require_once('auth.php');
+
+// Ensure uploads directory exists
+$uploadDir = '../uploads/';
+if (!is_dir($uploadDir)) {
+    mkdir($uploadDir, 0777, true);
+}
+
+$error = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = htmlspecialchars($_POST['title']);
     $description = htmlspecialchars($_POST['description']);
     $category = strtolower(trim($_POST['category']));
 
-    // Ensure file was uploaded
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-        $uploadDir = 'uploads/';
         $filename = time() . '_' . basename($_FILES['image']['name']);
         $targetFile = $uploadDir . $filename;
 
-        // Move uploaded file to uploads/
         if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
-            // Load existing gallery
+            // Update gallery.json
             $jsonFile = '../data/gallery.json';
             $gallery = [];
 
@@ -21,7 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $gallery = json_decode(file_get_contents($jsonFile), true);
             }
 
-            // Add new image to gallery
             $imageData = [
                 "filename" => $filename,
                 "title" => $title,
@@ -29,23 +36,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "category" => $category
             ];
 
-            array_unshift($gallery, $imageData); // Newest first
-
-            // Save updated gallery
+            array_unshift($gallery, $imageData);
             file_put_contents($jsonFile, json_encode($gallery, JSON_PRETTY_PRINT));
 
-            // Redirect or message
             header("Location: dashboard.php?success=1");
             exit;
         } else {
-            $error = "Failed to move uploaded file.";
+            $error = "❌ Failed to move uploaded file. Make sure the uploads folder is writable.";
         }
     } else {
-        $error = "Please choose a valid image.";
+        $error = "❌ Please choose a valid image file.";
     }
 }
 ?>
-<?php require_once('auth.php'); ?>
+
 <!DOCTYPE html>
 <html>
 <head>
